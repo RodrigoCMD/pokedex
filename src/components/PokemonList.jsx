@@ -27,6 +27,20 @@ const POKEMONS = [
     imageUrl:
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
   },
+  {
+    id: 7,
+    name: 'Squirtle',
+    type: 'Água',
+    imageUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
+  },
+  {
+    id: 70,
+    name: 'Weepinbell',
+    type: 'Grama / Veneno',
+    imageUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/70.png',
+  }
 ]
 function PokemonList() {
   const [pokemons] = useState(POKEMONS)
@@ -35,6 +49,16 @@ function PokemonList() {
   const listaFiltrada = pokemons.filter((p) =>
     p.name.toLowerCase().includes(filtro.toLowerCase())
   )
+
+   const NumPokemon = listaFiltrada.length;
+
+  let mostrandopokemon ;
+  
+  if (NumPokemon > 0){
+    mostrandopokemon = "Mostrando " + NumPokemon + " Pokémon(s)!";
+  } else {
+    mostrandopokemon = "Nenhum Pokémon encontrado para esta busca.";
+  }
 
   return (
     <section>
@@ -46,6 +70,7 @@ function PokemonList() {
         onChange={(e) => setFiltro(e.target.value)}
         placeholder="Ex.: char"
       />
+      <p>{mostrandopokemon}</p>
       {listaFiltrada.map((pokemon) => (
         <PokemonCard
           key={pokemon.id}
@@ -55,16 +80,7 @@ function PokemonList() {
           imageUrl={pokemon.imageUrl} />
       ))}
 
-      {
-        POKEMONS.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.name}
-            type={pokemon.type}
-            imageUrl={pokemon.imageUrl}
-          />
-        ))}
+     
     </section>
   )
 }
